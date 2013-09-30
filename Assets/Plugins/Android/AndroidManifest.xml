@@ -37,13 +37,22 @@
               android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen">
       <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="false" />
     </activity>
+    <receiver android:name="com.amazon.inapp.purchasing.ResponseReceiver">
+      <intent-filter>
+        <action
+            android:name="com.amazon.inapp.purchasing.NOTIFY"
+            android:permission="com.amazon.inapp.purchasing.Permission.NOTIFY"/>
+      </intent-filter>
+    </receiver>
   </application>
-	<uses-permission android:name="com.android.vending.BILLING"/>
-	<uses-permission android:name="android.permission.RECEIVE_SMS"/>
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="com.tmoney.vending.INBILLING"/>
-	<uses-permission android:name="org.onepf.openiab.permission.BILLING" />
+  <uses-permission android:name="com.android.vending.BILLING"/>
+  <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="com.tmoney.vending.INBILLING"/>
+  <uses-permission android:name="org.onepf.openiab.permission.BILLING" />
+  
+  <permission android:name="com.tmoney.vending.INBILLING"/>
 </manifest>
