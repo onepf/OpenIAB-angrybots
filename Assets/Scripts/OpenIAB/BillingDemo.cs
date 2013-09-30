@@ -58,7 +58,6 @@ public class BillingDemo : MonoBehaviour {
         OpenIAB.mapSku(SKU_INFINITE_AMMO, STORE_ONEPF, "onepf.sku_infinite_ammo");
 
         OpenIAB.init(new Dictionary<string, string> {
-            {OpenIAB.STORE_AMAZON, "c18a8ce946f646999c35b3da532aa9e3"},
             {OpenIAB.STORE_GOOGLE, ""},
             {OpenIAB.STORE_TSTORE, ""},
             {OpenIAB.STORE_SAMSUNG, ""},
