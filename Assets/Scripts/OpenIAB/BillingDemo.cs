@@ -58,7 +58,7 @@ public class BillingDemo : MonoBehaviour {
         OpenIAB.mapSku(SKU_INFINITE_AMMO, STORE_ONEPF, "onepf.sku_infinite_ammo");
 
         OpenIAB.init(new Dictionary<string, string> {
-            {OpenIAB.STORE_GOOGLE, ""},
+            {OpenIAB.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzeAEQ+WSZljSh2dSudzKq1VRKd+afvwYTAJYyb7aBC1joZ/CWAaUeVcnVHKuWdKgVtzClCO2Ld2vhzVseXAfpk64wClgT4dLK12qVJ6y4k54jmoW5JgSx6Qr4gns61b/BBtG1ITMdD1IF56eo4+ESpYl4xFsafEmItLQk+aY+91malPXDwv07sxYakOX7t1hE6GmMnOiSLdLq114uiJamJ+UglsCPeqerKiv1HNXJjzS4GZ3dsa5Qu2kGJd/IriQZM4p4I2TgeViqwOTt4V9VYekF5JId3vhA+xlr6X8hnkOPrmVduEsjynyKUxtz8fNMVkb5hX3V14BK3Kn11oCIwIDAQAB"},
             {OpenIAB.STORE_TSTORE, ""},
             {OpenIAB.STORE_SAMSUNG, ""},
             {OpenIAB.STORE_YANDEX, ""}

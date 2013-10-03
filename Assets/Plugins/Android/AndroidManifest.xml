@@ -4,8 +4,8 @@
     package="com.openiab.angrybots"
 	android:installLocation="preferExternal"
 	android:theme="@android:style/Theme.NoTitleBar"
-    android:versionCode="1"
-    android:versionName="1.0">
+    android:versionCode="4"
+    android:versionName="0.4">
   <supports-screens
       android:smallScreens="true"
       android:normalScreens="true"
