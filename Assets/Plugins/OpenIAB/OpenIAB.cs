@@ -85,11 +85,17 @@ namespace OpenIabPlugin {
         }
 
         public static bool areSubscriptionsSupported() {
+            if (Application.platform != RuntimePlatform.Android) {
+                return false;
+            }
             return _plugin.Call<bool>("areSubscriptionsSupported");
         }
 
         // Sends a request to get all completed purchases and product information
         public static void queryInventory() {
+            if (Application.platform != RuntimePlatform.Android) {
+                return;
+            }
             _plugin.Call("queryInventory");
         }
 
