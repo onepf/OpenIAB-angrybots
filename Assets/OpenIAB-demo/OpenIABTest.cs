@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using OpenIabPlugin;
+using OnePF;
 using System.Collections.Generic;
 
 public class OpenIABTest : MonoBehaviour {
@@ -32,7 +32,7 @@ public class OpenIABTest : MonoBehaviour {
 
     private void Start() {
         // Map sku for different stores
-        OpenIAB.mapSku(SKU, OpenIAB.STORE_GOOGLE, "google-play.sku");
+        OpenIAB.mapSku(SKU, OpenIAB_Android.STORE_GOOGLE, "google-play.sku");
         OpenIAB.mapSku(SKU, STORE_CUSTOM, "onepf.sku");
     }
 
@@ -49,10 +49,10 @@ public class OpenIABTest : MonoBehaviour {
 
             // Transmit list of supported stores
             OpenIAB.init(new Dictionary<string, string> {
-                {OpenIAB.STORE_GOOGLE, public_key},
-                {OpenIAB.STORE_TSTORE, public_key},
-                {OpenIAB.STORE_SAMSUNG, public_key},
-                {OpenIAB.STORE_YANDEX, public_key}
+                {OpenIAB_Android.STORE_GOOGLE, public_key},
+                {OpenIAB_Android.STORE_TSTORE, public_key},
+                {OpenIAB_Android.STORE_SAMSUNG, public_key},
+                {OpenIAB_Android.STORE_YANDEX, public_key}
             });
         }
 

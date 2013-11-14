@@ -15,9 +15,9 @@ class ReplacePrefabInstances extends ScriptableWizard {
 		
 		var gos : UnityEngine.Object[] = FindObjectsOfType (GameObject);
 		for (var i : int = 0; i<gos.Length; i++) {
-			if (EditorUtility.GetPrefabParent (gos[i]) == originalPrefab) {
+			if (PrefabUtility.GetPrefabParent (gos[i]) == originalPrefab) {
 				var oldGo : GameObject = gos[i] as GameObject;
-				var newGo : GameObject = EditorUtility.InstantiatePrefab (replacementPrefab) as GameObject;
+				var newGo : GameObject = PrefabUtility.InstantiatePrefab (replacementPrefab) as GameObject;
 				newGo.transform.parent = oldGo.transform.parent;
 				newGo.transform.localPosition = oldGo.transform.localPosition;
 				newGo.transform.localRotation = oldGo.transform.localRotation;

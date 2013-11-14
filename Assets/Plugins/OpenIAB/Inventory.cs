@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace OpenIabPlugin {
+namespace OnePF {
     public class Inventory {
         private Dictionary<String, SkuDetails> _skuMap = new Dictionary<String, SkuDetails>();
         private Dictionary<String, Purchase> _purchaseMap = new Dictionary<String, Purchase>();
@@ -25,19 +25,30 @@ namespace OpenIabPlugin {
             }
         }
 
+#if UNITY_IOS
+		public Inventory(StoreKitProduct[] products) {
+			foreach (var product in products) {
+				string sku = OpenIAB_iOS.StoreSku2Sku(product.identifier);
+				_skuMap.Add(sku, new SkuDetails(product));
+				if (OpenIAB_iOS.IsProductPurchased(product.identifier)) {
+					_purchaseMap.Add(sku, Purchase.CreateFromSku(sku));
+				}
+			}
+		}
+#endif
+
         public override string ToString() {
             StringBuilder str = new StringBuilder();
-            str.Append("purchaseMap:{");
+            str.Append("{purchaseMap:{");
             foreach (var pair in _purchaseMap) {
                 str.Append("\"" + pair.Key + "\":{" + pair.Value.ToString() + "}");
             }
-            str.Append("}; ");
+            str.Append("},");
             str.Append("skuMap:{");
             foreach (var pair in _skuMap) {
                 str.Append("\"" + pair.Key + "\":{" + pair.Value.ToString() + "}");
             }
-            str.Append("}");
-
+			str.Append("}}");
             return str.ToString();
         }
 

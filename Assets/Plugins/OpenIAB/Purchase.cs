@@ -2,7 +2,7 @@
  * Represents an in-app billing purchase.
  * 
  */
-namespace OpenIabPlugin {
+namespace OnePF {
     public class Purchase {
         public string ItemType { get; private set; }  // ITEM_TYPE_INAPP or ITEM_TYPE_SUBS
         public string OrderId { get; private set; }

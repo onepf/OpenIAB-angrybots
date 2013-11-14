@@ -1,7 +1,9 @@
-﻿/**
+using UnityEngine;
+
+/**
  * Represents an in-app product's listing details.
  */
-namespace OpenIabPlugin {
+namespace OnePF {
     public class SkuDetails {
         public string ItemType { get; private set; }
         public string Sku { get; private set; }
@@ -21,6 +23,24 @@ namespace OpenIabPlugin {
             Description = j.ToString("description");
             Json = j.ToString("json");
         }
+
+#if UNITY_IOS
+		public SkuDetails(StoreKitProduct storeKitProduct) {
+			//Debug.Log(storeKitProduct);
+
+			Sku = OpenIAB_iOS.StoreSku2Sku(storeKitProduct.identifier);
+			//Debug.Log(storeKitProduct.identifier);
+
+			Price = storeKitProduct.localPrice;
+			//Debug.Log(storeKitProduct.localPrice);
+
+			Title = storeKitProduct.localizedTitle;
+			//Debug.Log(storeKitProduct.localizedTitle);
+
+			Description = storeKitProduct.localizedDescription;
+			//Debug.Log(storeKitProduct.localizedDescription);
+		}
+#endif	
 
         public override string ToString() {
             return string.Format("SkuDetails: type = {0}, SKU = {1}, title = {2}, price = {3}, description = {4}", ItemType, Sku, Title, Price, Description);
