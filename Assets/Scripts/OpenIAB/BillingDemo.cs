@@ -18,10 +18,10 @@ public class BillingDemo : MonoBehaviour {
 
     private const int N_ROUNDS = 5;
 
-	public const string SKU_MEDKIT = "sku_medkit";
-	public const string SKU_AMMO = "sku_ammo";
-	public const string SKU_INFINITE_AMMO = "sku_infinite_ammo";
-	public const string SKU_COWBOY_HAT = "sku_cowboy_hat";
+    public const string SKU_MEDKIT = "sku_medkit";
+    public const string SKU_AMMO = "sku_ammo";
+    public const string SKU_INFINITE_AMMO = "sku_infinite_ammo";
+    public const string SKU_COWBOY_HAT = "sku_cowboy_hat";
 
     private bool _processingPayment = false;
     private bool _showShopWindow = false;
@@ -48,29 +48,26 @@ public class BillingDemo : MonoBehaviour {
         OpenIABEventManager.purchaseFailedEvent += OnPurchaseFailed;
         OpenIABEventManager.consumePurchaseSucceededEvent += OnConsumePurchaseSucceeded;
         OpenIABEventManager.consumePurchaseFailedEvent += OnConsumePurchaseFailed;
-		OpenIABEventManager.transactionRestoredEvent += OnTransactionRestored;
-		OpenIABEventManager.restoreSucceededEvent += OnRestoreSucceeded;
-		OpenIABEventManager.restoreFailedEvent += OnRestoreFailed;
+        OpenIABEventManager.transactionRestoredEvent += OnTransactionRestored;
+        OpenIABEventManager.restoreSucceededEvent += OnRestoreSucceeded;
+        OpenIABEventManager.restoreFailedEvent += OnRestoreFailed;
     }
 
     private void Start() {
-		// SKU's for iOS MUST be mapped. Mappings for other stores are optional
-		OpenIAB.mapSku(SKU_MEDKIT, OpenIAB_iOS.STORE, "30_real");
-		OpenIAB.mapSku(SKU_AMMO, OpenIAB_iOS.STORE, "75_real");
-		OpenIAB.mapSku(SKU_INFINITE_AMMO, OpenIAB_iOS.STORE, "noncons_2");
-		OpenIAB.mapSku(SKU_COWBOY_HAT, OpenIAB_iOS.STORE, "noncons_1");
+        // SKU's for iOS MUST be mapped. Mappings for other stores are optional
+        OpenIAB.mapSku(SKU_MEDKIT, OpenIAB_iOS.STORE, "30_real");
+        OpenIAB.mapSku(SKU_AMMO, OpenIAB_iOS.STORE, "75_real");
+        OpenIAB.mapSku(SKU_INFINITE_AMMO, OpenIAB_iOS.STORE, "noncons_2");
+        OpenIAB.mapSku(SKU_COWBOY_HAT, OpenIAB_iOS.STORE, "noncons_1");
 
-		OpenIAB.mapSku(SKU_MEDKIT, STORE_ONEPF, "onepf.sku_medkit");
+        OpenIAB.mapSku(SKU_MEDKIT, STORE_ONEPF, "onepf.sku_medkit");
         OpenIAB.mapSku(SKU_AMMO, STORE_ONEPF, "onepf.sku_ammo");
         OpenIAB.mapSku(SKU_COWBOY_HAT, STORE_ONEPF, "onepf.sku_cowboy_hat");
         OpenIAB.mapSku(SKU_INFINITE_AMMO, STORE_ONEPF, "onepf.sku_infinite_ammo");
 
-        OpenIAB.init(new Dictionary<string, string> {
-            {OpenIAB_Android.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtKiFBiESx95DM1B6acfQVSns4fHR8wwvwzvHTwYac2TWEBdTkvn2tmZwu61NYrp2Puq1qHfgRM2M1pZcfmtUcDwTInP7uD5Gebom8MrOQfC6L8gMj9uksq1MyYq3vhkcHibKhpF47iaLvWsSnzYuwZ0iWGYh71OA2G7S28D1ikQdG+pzJdw9eFi6W+Gmfo0INII30npkNHwxnDv9wZ+eGqvp5M/JqZF3O3p8kjvsUb2IQj7eZlvSAhM/Z2p5XdSi1Os1r2Xu4um0Wv2HcgcbfCJqBwruuZVE+51zyPUMRYkm2/Nv9MyIEHmejvo0wHRmW1iuUzbwgEnkJYxPRqVUKwIDAQAB"},
-            {OpenIAB_Android.STORE_TSTORE, ""},
-            {OpenIAB_Android.STORE_SAMSUNG, ""},
-            {OpenIAB_Android.STORE_YANDEX, ""}
-        });
+        var options = new OnePF.Options();
+        options.storeKeys.Add(OnePF.OpenIAB_Android.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtKiFBiESx95DM1B6acfQVSns4fHR8wwvwzvHTwYac2TWEBdTkvn2tmZwu61NYrp2Puq1qHfgRM2M1pZcfmtUcDwTInP7uD5Gebom8MrOQfC6L8gMj9uksq1MyYq3vhkcHibKhpF47iaLvWsSnzYuwZ0iWGYh71OA2G7S28D1ikQdG+pzJdw9eFi6W+Gmfo0INII30npkNHwxnDv9wZ+eGqvp5M/JqZF3O3p8kjvsUb2IQj7eZlvSAhM/Z2p5XdSi1Os1r2Xu4um0Wv2HcgcbfCJqBwruuZVE+51zyPUMRYkm2/Nv9MyIEHmejvo0wHRmW1iuUzbwgEnkJYxPRqVUKwIDAQAB");
+        OpenIAB.init(options);
     }
 
     private void OnDestroy() {
@@ -82,9 +79,9 @@ public class BillingDemo : MonoBehaviour {
         OpenIABEventManager.purchaseFailedEvent -= OnPurchaseFailed;
         OpenIABEventManager.consumePurchaseSucceededEvent -= OnConsumePurchaseSucceeded;
         OpenIABEventManager.consumePurchaseFailedEvent -= OnConsumePurchaseFailed;
-		OpenIABEventManager.transactionRestoredEvent -= OnTransactionRestored;
-		OpenIABEventManager.restoreSucceededEvent -= OnRestoreSucceeded;
-		OpenIABEventManager.restoreFailedEvent -= OnRestoreFailed;
+        OpenIABEventManager.transactionRestoredEvent -= OnTransactionRestored;
+        OpenIABEventManager.restoreSucceededEvent -= OnRestoreSucceeded;
+        OpenIABEventManager.restoreFailedEvent -= OnRestoreFailed;
     }
 
     // Verifies the developer payload of a purchase.
@@ -139,7 +136,7 @@ public class BillingDemo : MonoBehaviour {
         bool isCowboyHat = (cowboyHatPurchase != null && VerifyDeveloperPayload(cowboyHatPurchase.DeveloperPayload));
         Debug.Log("User " + (isCowboyHat ? "HAS" : "HAS NO") + " cowboy hat");
         _playerHat.PutOn = isCowboyHat;
-        
+
         // Check for delivery of expandable items. If we own some, we should consume everything immediately
         Purchase medKitPurchase = inventory.GetPurchase(SKU_MEDKIT);
         if (medKitPurchase  != null && VerifyDeveloperPayload(medKitPurchase.DeveloperPayload)) {
@@ -209,18 +206,18 @@ public class BillingDemo : MonoBehaviour {
         Debug.Log("Consume purchase failed: " + error);
         _processingPayment = false;
     }
-	
-	private void OnTransactionRestored(string sku) {
-		Debug.Log("Transaction restored: " + sku);
-	}
-	
-	private void OnRestoreSucceeded() {
-		Debug.Log("Transactions restored successfully");
-	}
-	
-	private void OnRestoreFailed(string error) {
-		Debug.Log("Transaction restore failed: " + error);	
-	}
+
+    private void OnTransactionRestored(string sku) {
+        Debug.Log("Transaction restored: " + sku);
+    }
+
+    private void OnRestoreSucceeded() {
+        Debug.Log("Transactions restored successfully");
+    }
+
+    private void OnRestoreFailed(string error) {
+        Debug.Log("Transaction restore failed: " + error);
+    }
     #endregion // Billing
 
     #region GUI
@@ -349,9 +346,9 @@ public class BillingDemo : MonoBehaviour {
             if (string.IsNullOrEmpty(_popupText) && GUI.Button(new Rect(Screen.width-BUTTON_WIDTH-OFFSET, OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT), "Shop", GUI.skin.button)) {
                 ShowShopWindow(true);
             }
-			if (GUI.Button(new Rect(Screen.width-BUTTON_WIDTH-OFFSET, OFFSET*2+BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT/2), "Restore", GUI.skin.button)) {
-				OpenIAB.restoreTransactions();
-			}		
+            if (GUI.Button(new Rect(Screen.width-BUTTON_WIDTH-OFFSET, OFFSET*2+BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT/2), "Restore", GUI.skin.button)) {
+                OpenIAB.restoreTransactions();
+            }
         } else {
             GUI.Window(0, new Rect(Screen.width/2-WINDOW_WIDTH/2, Screen.height/2-WINDOW_HEIGHT/2, WINDOW_WIDTH, WINDOW_HEIGHT), DrawShopWindow, "Game Shop");
         }

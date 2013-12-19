@@ -61,6 +61,11 @@ namespace OnePF {
 			_purchaseSet.Add(sku);
 		}
 
+        public void init(Options options) {
+            if (!IsDevice()) return;
+            init(options.storeKeys);
+        }
+
 		public void init(Dictionary<string, string> storeKeys=null) {
 			if (!IsDevice()) return;
 
@@ -91,8 +96,12 @@ namespace OnePF {
 		public bool areSubscriptionsSupported() {
 			return true;
 		}
-		
-		public void queryInventory() {
+
+        public void queryInventory() {
+            queryInventory(null);
+        }
+
+		public void queryInventory(string[] skus) {
 			if (!IsDevice()) {
 				return;
 			}

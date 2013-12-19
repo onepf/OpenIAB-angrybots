@@ -26,8 +26,13 @@ namespace OnePF {
         public static void mapSku(string sku, string storeName, string storeSku) {
             _billing.mapSku(sku, storeName, storeSku);
         }
-		
+
         // Starts up the billing service. This will also check to see if in app billing is supported and fire the appropriate event
+        public static void init(Options options) {
+            _billing.init(options);
+        }
+
+        [System.Obsolete("Please use overloaded version with 'Options' param")]
         public static void init(Dictionary<string, string> storeKeys) {
 			_billing.init(storeKeys);
         }
@@ -41,9 +46,14 @@ namespace OnePF {
             return _billing.areSubscriptionsSupported();
         }
 
-        // Sends a request to get all completed purchases and product information
+        // Sends a request to get all completed purchases
         public static void queryInventory() {
             _billing.queryInventory();
+        }
+
+        // Sends a request to get all completed purchases and specified skus information
+        public static void queryInventory(string[] skus) {
+            _billing.queryInventory(skus);
         }
 
         // Purchases the product with the given sku and developerPayload
