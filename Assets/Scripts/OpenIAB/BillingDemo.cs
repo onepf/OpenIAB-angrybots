@@ -19,7 +19,7 @@ public class BillingDemo : MonoBehaviour {
     private const int N_ROUNDS = 5;
 
     public const string SKU_MEDKIT = "sku_medkit";
-    public const string SKU_AMMO = "sku_ammo";
+    public const string SKU_AMMO = "sku_ammo_pack";
     public const string SKU_INFINITE_AMMO = "sku_infinite_ammo";
     public const string SKU_COWBOY_HAT = "sku_cowboy_hat";
 
@@ -113,7 +113,7 @@ public class BillingDemo : MonoBehaviour {
 
     private void OnBillingSupported() {
         Debug.Log("Billing is supported");
-        OpenIAB.queryInventory();
+        OpenIAB.queryInventory(new string[] { SKU_AMMO, SKU_COWBOY_HAT, SKU_INFINITE_AMMO, SKU_MEDKIT });
     }
 
     private void OnBillingNotSupported(string error) {
