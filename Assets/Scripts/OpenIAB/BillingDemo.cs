@@ -66,7 +66,8 @@ public class BillingDemo : MonoBehaviour {
         OpenIAB.mapSku(SKU_INFINITE_AMMO, STORE_ONEPF, "onepf.sku_infinite_ammo");
 
         var options = new OnePF.Options();
-        options.storeKeys.Add(OnePF.OpenIAB_Android.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtKiFBiESx95DM1B6acfQVSns4fHR8wwvwzvHTwYac2TWEBdTkvn2tmZwu61NYrp2Puq1qHfgRM2M1pZcfmtUcDwTInP7uD5Gebom8MrOQfC6L8gMj9uksq1MyYq3vhkcHibKhpF47iaLvWsSnzYuwZ0iWGYh71OA2G7S28D1ikQdG+pzJdw9eFi6W+Gmfo0INII30npkNHwxnDv9wZ+eGqvp5M/JqZF3O3p8kjvsUb2IQj7eZlvSAhM/Z2p5XdSi1Os1r2Xu4um0Wv2HcgcbfCJqBwruuZVE+51zyPUMRYkm2/Nv9MyIEHmejvo0wHRmW1iuUzbwgEnkJYxPRqVUKwIDAQAB");
+        options.availableStores = new string[] { OpenIAB_Android.STORE_GOOGLE };
+        options.storeKeys.Add(OpenIAB_Android.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtKiFBiESx95DM1B6acfQVSns4fHR8wwvwzvHTwYac2TWEBdTkvn2tmZwu61NYrp2Puq1qHfgRM2M1pZcfmtUcDwTInP7uD5Gebom8MrOQfC6L8gMj9uksq1MyYq3vhkcHibKhpF47iaLvWsSnzYuwZ0iWGYh71OA2G7S28D1ikQdG+pzJdw9eFi6W+Gmfo0INII30npkNHwxnDv9wZ+eGqvp5M/JqZF3O3p8kjvsUb2IQj7eZlvSAhM/Z2p5XdSi1Os1r2Xu4um0Wv2HcgcbfCJqBwruuZVE+51zyPUMRYkm2/Nv9MyIEHmejvo0wHRmW1iuUzbwgEnkJYxPRqVUKwIDAQAB");
         OpenIAB.init(options);
     }
 
