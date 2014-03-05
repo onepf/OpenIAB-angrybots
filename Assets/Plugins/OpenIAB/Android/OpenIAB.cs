@@ -11,9 +11,7 @@ namespace OnePF {
  {
         public static readonly string STORE_GOOGLE;
         public static readonly string STORE_AMAZON;
-        public static readonly string STORE_TSTORE;
         public static readonly string STORE_SAMSUNG;
-        public static readonly string STORE_YANDEX;
 
 #if UNITY_ANDROID
         private static AndroidJavaObject _plugin;
@@ -22,9 +20,7 @@ namespace OnePF {
             if (Application.platform != RuntimePlatform.Android) {
                 STORE_GOOGLE = "STORE_GOOGLE";
                 STORE_AMAZON = "STORE_AMAZON";
-                STORE_TSTORE = "STORE_TSTORE";
                 STORE_SAMSUNG = "STORE_SAMSUNG";
-                STORE_YANDEX = "STORE_YANDEX";
                 return;
             }
 
@@ -35,9 +31,7 @@ namespace OnePF {
                 _plugin = pluginClass.CallStatic<AndroidJavaObject>("instance");
                 STORE_GOOGLE = pluginClass.GetStatic<string>("STORE_GOOGLE");
                 STORE_AMAZON = pluginClass.GetStatic<string>("STORE_AMAZON");
-                STORE_TSTORE = pluginClass.GetStatic<string>("STORE_TSTORE");
                 STORE_SAMSUNG = pluginClass.GetStatic<string>("STORE_SAMSUNG");
-                STORE_YANDEX = pluginClass.GetStatic<string>("STORE_YANDEX");
             }
         }
 
@@ -73,8 +67,7 @@ namespace OnePF {
         public void init(Options options) {
             if (!IsDevice()) return;
 
-            using (var j_options = new AndroidJavaObject("org.onepf.openiab.UnityOptions"))
-            {
+            using (var j_options = new AndroidJavaObject("org.onepf.oms.OpenIabHelper$Options")) {
                 j_options.Set<int>("discoveryTimeoutMs", options.discoveryTimeoutMs);
                 j_options.Set<bool>("checkInventory", options.checkInventory);
                 j_options.Set<int>("checkInventoryTimeoutMs", options.checkInventoryTimeoutMs);
@@ -84,13 +77,7 @@ namespace OnePF {
                 j_options.Set("storeKeys", j_storeKeys);
                 j_storeKeys.Dispose();
 
-                IntPtr fieldId = AndroidJNI.GetFieldID(j_options.GetRawClass(), "prefferedStoreNames", "[Ljava/lang/String;");
-                IntPtr arr = AndroidJNIHelper.ConvertToJNIArray(options.prefferedStoreNames);
-                AndroidJNI.SetObjectField(j_options.GetRawObject(), fieldId, arr);
-
-                fieldId = AndroidJNI.GetFieldID(j_options.GetRawClass(), "availableStores", "[Ljava/lang/String;");
-                arr = AndroidJNIHelper.ConvertToJNIArray(options.availableStores);
-                AndroidJNI.SetObjectField(j_options.GetRawObject(), fieldId, arr);
+                j_options.Set("prefferedStoreNames", AndroidJNIHelper.ConvertToJNIArray(options.prefferedStoreNames));
 
                 _plugin.Call("initWithOptions", j_options);
             }
@@ -173,13 +160,23 @@ namespace OnePF {
 
         public void restoreTransactions() {
         }
+
+        public bool isDebugLog() {
+            return _plugin.Call<bool>("isDebugLog");
+        }
+
+        public void enableDebugLogging(bool enabled) {
+            _plugin.Call("enableDebugLogging", enabled);
+        }
+
+        public void enableDebugLogging(bool enabled, string tag) {
+            _plugin.Call("enableDebugLogging", enabled, tag);
+        }
 #else
 		static OpenIAB_Android() {
             STORE_GOOGLE = "STORE_GOOGLE";
             STORE_AMAZON = "STORE_AMAZON";
-            STORE_TSTORE = "STORE_TSTORE";
             STORE_SAMSUNG = "STORE_SAMSUNG";
-            STORE_YANDEX = "STORE_YANDEX";
 		}
 #endif
     }
