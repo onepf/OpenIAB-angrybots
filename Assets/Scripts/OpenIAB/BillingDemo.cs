@@ -161,9 +161,11 @@ public class BillingDemo : MonoBehaviour {
         }
         switch (purchase.Sku) {
             case SKU_MEDKIT:
+                _playerMedKitPack.Supply(1);
                 OpenIAB.consumeProduct(purchase);
                 return;
             case SKU_AMMO:
+                _playerAmmoBox.Supply(N_ROUNDS);
                 OpenIAB.consumeProduct(purchase);
                 return;
             case SKU_COWBOY_HAT:
@@ -179,27 +181,14 @@ public class BillingDemo : MonoBehaviour {
         _processingPayment = false;
     }
 
-    private void OnPurchaseFailed(string error) {
+    private void OnPurchaseFailed(int errorCode, string error) {
         Debug.Log("Purchase failed: " + error);
         _processingPayment = false;
     }
 
     private void OnConsumePurchaseSucceeded(Purchase purchase) {
         Debug.Log("Consume purchase succeded: " + purchase.ToString());
-
         _processingPayment = false;
-
-        switch (purchase.Sku) {
-            case SKU_MEDKIT:
-                _playerMedKitPack.Supply(1);
-                return;
-            case SKU_AMMO:
-                _playerAmmoBox.Supply(N_ROUNDS);
-                return;
-            default:
-                Debug.LogWarning("Unknown SKU: " + purchase.Sku);
-                return;
-        }
     }
 
     private void OnConsumePurchaseFailed(string error) {
