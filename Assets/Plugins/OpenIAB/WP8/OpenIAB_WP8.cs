@@ -30,22 +30,22 @@ namespace OnePF
 
         static OpenIAB_WP8()
         {
-            Store.PurchaseSucceeded += (storeSku, payload) => 
+            Store.PurchaseSucceeded += (storeSku, payload) =>
             {
                 string sku = GetSku(storeSku);
                 Purchase purchase = Purchase.CreateFromSku(sku, payload);
-                OpenIAB.EventManager.SendMessage("OnPurchaseSucceeded", purchase); 
+                OpenIAB.EventManager.SendMessage("OnPurchaseSucceeded", purchase);
             };
             Store.PurchaseFailed += (error) => { OpenIAB.EventManager.SendMessage("OnPurchaseFailed", error); };
-            
-            Store.ConsumeSucceeded += (storeSku) => 
-            { 
+
+            Store.ConsumeSucceeded += (storeSku) =>
+            {
                 string sku = GetSku(storeSku);
                 Purchase purchase = Purchase.CreateFromSku(sku);
-                OpenIAB.EventManager.SendMessage("OnConsumePurchaseSucceeded", purchase); 
+                OpenIAB.EventManager.SendMessage("OnConsumePurchaseSucceeded", purchase);
             };
             Store.ConsumeFailed += (error) => { OpenIAB.EventManager.SendMessage("OnConsumePurchaseFailed", error); };
-            
+
             Store.LoadListingsSucceeded += (listings) =>
             {
                 Inventory inventory = GetInventory();

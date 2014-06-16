@@ -22,19 +22,20 @@ namespace OnePF
         {
         }
 
-        public Purchase(string jsonString) {
-			var json = new JSON(jsonString);
-			ItemType = json.ToString("itemType");
-			OrderId = json.ToString("orderId");
-			PackageName = json.ToString("packageName");
-			Sku = json.ToString("sku");
-			PurchaseTime = json.ToLong("purchaseTime");
-			PurchaseState = json.ToInt("purchaseState");
-			DeveloperPayload = json.ToString("developerPayload");
-			Token = json.ToString("token");
-			OriginalJson = json.ToString("originalJson");
-			Signature = json.ToString("signature");
-			AppstoreName = json.ToString("appstoreName");
+        public Purchase(string jsonString)
+        {
+            var json = new JSON(jsonString);
+            ItemType = json.ToString("itemType");
+            OrderId = json.ToString("orderId");
+            PackageName = json.ToString("packageName");
+            Sku = json.ToString("sku");
+            PurchaseTime = json.ToLong("purchaseTime");
+            PurchaseState = json.ToInt("purchaseState");
+            DeveloperPayload = json.ToString("developerPayload");
+            Token = json.ToString("token");
+            OriginalJson = json.ToString("originalJson");
+            Signature = json.ToString("signature");
+            AppstoreName = json.ToString("appstoreName");
         }
 
 #if UNITY_IOS
